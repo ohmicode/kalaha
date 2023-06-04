@@ -33,10 +33,12 @@ the game is the player who has the most stones in his big pit.
    ```
 2. Run the game in a browser:
    ```
-   localhost:8080/index.html
+   localhost:8080/front/index.html
    ```
 
 ### TODO
 List of improvements that could be done, but were not applied yet:
 1. Split front-end and back-end parts. These should be different repos for production-like solution.
 2. Append moves History for each Game and ability to Replay it.
+3. Replace Long with UUID for playerId and gameId, if we want more security here.
+4. Append Prometeus+Grafana metrics. We have Actuator endpoints only for now.

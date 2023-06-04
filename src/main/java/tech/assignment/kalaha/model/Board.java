@@ -14,6 +14,7 @@ public class Board {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    private String name;
     private Long Player1Id;
     private Long Player2Id;
     private int turn = 1;
@@ -31,6 +32,14 @@ public class Board {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getPlayer1Id() {

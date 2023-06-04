@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Kalaha online game</title>
+    <link rel="stylesheet" type="text/css" href="/css/site.css">
+    <script src="/js/scipt.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <h2>Select game</h2>
+    <p>Start a new game or join existing one:</p>
+</div>
+
+<div class="data left">
+    <label for="pits">Number of pits</label>
+    <input id="pits" name="pits" value="6"/>
+    <br/>
+    <label for="stones">Amount of stones in each pit</label>
+    <input id="stones" name="stones" value="6"/>
+    <br/>
+    <button type="button" onclick="resetToDefault();">Default values</button>
+    <button type="button" onclick="createGame(document.getElementById('pits').value, document.getElementById('stones').value);">Create</button>
+</div>
+
+<div class="data right">
+    <label for="gameId">Game id:</label>
+    <input id="gameId" name="gameId"/>
+    <br/>
+    <button type="button" onclick="joinGame(document.getElementById('gameId').value);">Join</button>
+</div>
+
+<div class="footer">
+    <p>Relax and Enjoy!</p>
+</div>
+</body>
+</html>

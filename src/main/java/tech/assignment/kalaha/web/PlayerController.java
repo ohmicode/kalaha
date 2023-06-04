@@ -36,6 +36,16 @@ public class PlayerController {
         return transform(player);
     }
 
+    @ApiOperation(value = "Get a player by login", notes = "Finds a Player by login and returns the info")
+    @GetMapping("/login")
+    public PlayerDto login(
+            @ApiParam(name = "login", value = "Player login", example = "user")
+            @RequestParam String login
+    ) {
+        Player player = playerService.findByLogin(login);
+        return transform(player);
+    }
+
     @ApiOperation(value = "Create a player", notes = "Creates a new Player if given login does not exist")
     @PostMapping
     public PlayerDto createPlayer(

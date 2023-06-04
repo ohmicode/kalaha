@@ -10,6 +10,8 @@ public class BoardDto {
 
     @ApiModelProperty(notes = "Game id", example = "10", required = true)
     private Long id;
+    @ApiModelProperty(notes = "Game name to display", example = "Alice - Bob", required = true)
+    private String name;
     @ApiModelProperty(notes = "Pits for Player 1, contains amount of stones in each", example = "[1, 2, 3]", required = true)
     private List<Integer> pits1 = new ArrayList<>();
     @ApiModelProperty(notes = "Pits for Player 2, contains amount of stones in each", example = "[4, 4, 4]", required = true)
@@ -23,6 +25,7 @@ public class BoardDto {
 
     public BoardDto(
             Long id,
+            String name,
             List<Integer> side1,
             List<Integer> side2,
             int pool1,
@@ -30,6 +33,7 @@ public class BoardDto {
             GameState gameState
     ) {
         this.id = id;
+        this.name = name;
         this.pool1 = pool1;
         this.pool2 = pool2;
         this.gameState = gameState;
@@ -43,6 +47,14 @@ public class BoardDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Integer> getPits1() {

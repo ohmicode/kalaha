@@ -39,10 +39,31 @@ public class GameController {
     @ApiOperation(value = "Create a game", notes = "Creates a new Game for a given Player")
     @PostMapping
     public BoardDto createGame(
-            @ApiParam(name = "playerId", value = "Player id, owner of the Game", example = "3")
-            @RequestParam Long playerId
+            @ApiParam(name = "playerId", value = "Player id, owner of the Game", example = "12")
+            @RequestParam Long playerId,
+            @ApiParam(name = "size", value = "Number of pits for each player (optional)", example = "3")
+            @RequestParam(required = false) Integer size,
+            @ApiParam(name = "stones", value = "Number of stones in each pit (optional)", example = "2")
+            @RequestParam(required = false) Integer stones
     ){
-        Board board = gameService.createGame(playerId);
+        if (size == null || stones == null) {
+            Board board = gameService.createGame(playerId);
+            return transform(board);
+        } else {
+            Board board = gameService.createCustomGame(playerId, size, stones);
+            return transform(board);
+        }
+    }
+
+    @ApiOperation(value = "Join the game", notes = "Appends second Player to the Game")
+    @PutMapping("/{gameId}/join")
+    public BoardDto joinGame(
+            @ApiParam(name = "gameId", value = "Game id", example = "1")
+            @PathVariable Long gameId,
+            @ApiParam(name = "playerId", value = "Player id, who makes the move", example = "2")
+            @RequestParam Long playerId
+    ) {
+        Board board = gameService.joinGame(gameId, playerId);
         return transform(board);
     }
 
@@ -68,6 +89,7 @@ public class GameController {
     private BoardDto transform(Board board) {
         return new BoardDto(
                 board.getId(),
+                board.getName(),
                 board.getSide1(),
                 board.getSide2(),
                 board.getPool1(),

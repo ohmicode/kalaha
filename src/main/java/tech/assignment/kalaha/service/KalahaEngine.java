@@ -23,6 +23,21 @@ public class KalahaEngine {
     public Board createGame(Player player1) {
         Board board = initBoard(DEFAULT_BOARD_SIZE, DEFAULT_AMOUNT);
         board.setPlayer1Id(player1.getId());
+        board.setName(player1.getNickname() + " - ");
+        return board;
+    }
+
+    /**
+     * Creates a board with custom settings
+     * @param player1 - Owner of the game (player #1)
+     * @param size - Number of pits on each side
+     * @param startAmount - Number of stones in each pit
+     * @return initialised Board
+     */
+    public Board createCustomGame(Player player1, int size, int startAmount) {
+        Board board = initBoard(size, startAmount);
+        board.setPlayer1Id(player1.getId());
+        board.setName(player1.getNickname() + " - ");
         return board;
     }
 

@@ -21,6 +21,11 @@ public class PlayerService {
                 .orElseThrow(() -> new WrongPlayerException("Player " + playerId + " does not exist"));
     }
 
+    public Player findByLogin(String login) {
+        return playerRepository.findByLogin(login)
+                .orElseThrow(() -> new WrongPlayerException("Player " + login + " does not exist"));
+    }
+
     public Player createPlayer(String login, String nickname) {
         Player player = new Player();
         player.setLogin(login);

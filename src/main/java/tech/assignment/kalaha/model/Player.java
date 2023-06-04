@@ -1,15 +1,13 @@
 package tech.assignment.kalaha.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Player {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @Column(unique=true)
     private String login;
     private String nickname;
     private Long wins = 0L;
