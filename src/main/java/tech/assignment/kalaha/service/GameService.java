@@ -39,6 +39,7 @@ public class GameService {
     public Board makeMove(long boardId, long playerId, int pitNumber) {
         Board board = getBoard(boardId);
         Player player = playerService.getPlayer(playerId);
-        return kalahaEngine.makeMove(board, player, pitNumber);
+        Board changed = kalahaEngine.makeMove(board, player, pitNumber);
+        return boardRepository.save(changed);
     }
 }
