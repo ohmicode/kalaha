@@ -14,6 +14,11 @@ services:
   kalaha:
     build: .
     environment:
+      POSTGRES_HOST: database
+      POSTGRES_PORT: 15432
+      POSTGRES_DATABASE: kalaha
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       SPRING_PROFILES_ACTIVE: local
     ports:
       - 8080:8080
