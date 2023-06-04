@@ -27,4 +27,44 @@ public class PlayerDto {
         this.wins = wins;
         this.loses = loses;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public Long getWins() {
+        return wins;
+    }
+
+    public void setWins(Long wins) {
+        this.wins = wins;
+    }
+
+    public Long getLoses() {
+        return loses;
+    }
+
+    public void setLoses(Long loses) {
+        this.loses = loses;
+    }
 }

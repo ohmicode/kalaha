@@ -36,4 +36,52 @@ public class BoardDto {
         this.pits1.addAll(side1);
         this.pits2.addAll(side2);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Integer> getPits1() {
+        return pits1;
+    }
+
+    public void setPits1(List<Integer> pits1) {
+        this.pits1 = pits1;
+    }
+
+    public List<Integer> getPits2() {
+        return pits2;
+    }
+
+    public void setPits2(List<Integer> pits2) {
+        this.pits2 = pits2;
+    }
+
+    public int getPool1() {
+        return pool1;
+    }
+
+    public void setPool1(int pool1) {
+        this.pool1 = pool1;
+    }
+
+    public int getPool2() {
+        return pool2;
+    }
+
+    public void setPool2(int pool2) {
+        this.pool2 = pool2;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
 }
