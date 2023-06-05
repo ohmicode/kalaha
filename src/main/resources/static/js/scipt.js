@@ -125,7 +125,6 @@ function buildBoardTable(pits1, pits2, pool1, pool2, mySide) {
 function makeMove(pit) {
     const playerId = getPlayerId();
     const gameId = getGameId();
-    // alert("Game " + gameId + ", Player " + playerId + " is going to move to cell " + pit);
     var xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -156,6 +155,27 @@ function buildLeaderboard(players) {
     let table = "<tr><th><div>Nickname</div></th><th><div>Wins</div></th><th><div>Loses</div></th></tr>";
     for (let i = 0; i < players.length; i++) {
         table += "<tr><td><div>" + players[i].nickname + "</div></td><td><div>" + players[i].wins + "</div></td><td><div>" + players[i].loses + "</div></td></tr>";
+    }
+    return table;
+}
+
+function loadGameList() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const jsonResponse = JSON.parse(xhttp.response);
+            document.getElementById("gameList").innerHTML = buildGameList(jsonResponse);
+        }
+    };
+    xhttp.open("GET", "/api/game/last", true);
+    xhttp.send();
+}
+
+function buildGameList(games) {
+    let table = "<tr><th><div>Game</div></th><th><div>Status</div></th></tr>";
+    for (let i = 0; i < games.length; i++) {
+        const link = "/front/board.html?gameId=" + games[i].id + "&playerId=";
+        table += "<tr><td><div><a href='" + link + "'>" + games[i].name + "</a></div></td><td><div>" + games[i].gameStatus + "</div></td></tr>";
     }
     return table;
 }

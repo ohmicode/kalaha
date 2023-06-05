@@ -10,6 +10,9 @@ import tech.assignment.kalaha.model.Board;
 import tech.assignment.kalaha.service.GameService;
 import tech.assignment.kalaha.web.dto.BoardDto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/game")
 @ApiOperation(value = "Game API", notes = "Provides methods to control one Game match")
@@ -36,6 +39,12 @@ public class GameController {
     ) {
         Board board = gameService.getBoard(gameId);
         return transform(board, playerId);
+    }
+
+    @ApiOperation(value = "Get games", notes = "Returns last 20 Games")
+    @GetMapping("/last")
+    public List<BoardDto> getLatGames() {
+        return gameService.getLastGames().stream().map(it -> transform(it, null)).collect(Collectors.toList());
     }
 
     @ApiOperation(value = "Create a game", notes = "Creates a new Game for a given Player")

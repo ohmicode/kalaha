@@ -1,11 +1,23 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <title>Kalaha online game</title>
     <link rel="stylesheet" type="text/css" href="/css/site.css">
+    <link rel="stylesheet" type="text/css" href="/css/prettytable.css">
+    <script src="/js/scipt.js"></script>
 </head>
 
-<body>
-STUB PAGE
+<body onload="loadGameList()">
+<div class="container">
+    <h2>Spectate</h2>
+</div>
+
+<div class="tableContainer">
+    <table id="gameList">
+        <tr>
+            <td><div>LOADING...</div></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

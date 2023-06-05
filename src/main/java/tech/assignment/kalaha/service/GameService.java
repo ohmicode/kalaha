@@ -9,6 +9,8 @@ import tech.assignment.kalaha.model.GameStatus;
 import tech.assignment.kalaha.model.Player;
 import tech.assignment.kalaha.repository.BoardRepository;
 
+import java.util.List;
+
 @Service
 public class GameService {
 
@@ -25,6 +27,10 @@ public class GameService {
         this.playerService = playerService;
         this.boardRepository = boardRepository;
         this.kalahaEngine = kalahaEngine;
+    }
+
+    public List<Board> getLastGames() {
+        return boardRepository.findTop20ByOrderByIdDesc();
     }
 
     public Board createGame(Long playerId) {
