@@ -10,6 +10,9 @@ import tech.assignment.kalaha.model.Player;
 import tech.assignment.kalaha.service.PlayerService;
 import tech.assignment.kalaha.web.dto.PlayerDto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/player")
 @ApiOperation(value = "Player API", notes = "Provides methods to create and retrieve a Player info")
@@ -20,6 +23,12 @@ public class PlayerController {
     @Autowired
     public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
+    }
+
+    @ApiOperation(value = "Get a leaderboard", notes = "Returns list of 10 best players according to their win and lose statistics")
+    @GetMapping("/leaderboard")
+    public List<PlayerDto> getAllPlayers() {
+        return playerService.getLeaderboard().stream().map(this::transform).collect(Collectors.toList());
     }
 
     @ApiOperation(value = "Get a player by id", notes = "Returns a Player info")

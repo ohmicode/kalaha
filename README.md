@@ -41,4 +41,5 @@ List of improvements that could be done, but were not applied yet:
 1. Split front-end and back-end parts. These should be different repos for production-like solution.
 2. Append moves History for each Game and ability to Replay it.
 3. Replace Long with UUID for playerId and gameId, if we want more security here.
-4. Append Prometeus+Grafana metrics. We have Actuator endpoints only for now.
+4. We suppose this is a microservice BEHIND an Auth service, which provides all the security and identification functionality. If we suppose to make this project a standalone web app, we should append security, proper identification and login/password functionality alongside UUIDs for the entities ids.
+5. Append Prometeus+Grafana metrics. We have Actuator endpoints only for now.

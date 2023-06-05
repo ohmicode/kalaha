@@ -6,6 +6,8 @@ import tech.assignment.kalaha.exception.WrongPlayerException;
 import tech.assignment.kalaha.model.Player;
 import tech.assignment.kalaha.repository.PlayerRepository;
 
+import java.util.List;
+
 @Service
 public class PlayerService {
 
@@ -19,6 +21,22 @@ public class PlayerService {
     public Player getPlayer(Long playerId) {
         return playerRepository.findById(playerId)
                 .orElseThrow(() -> new WrongPlayerException("Player " + playerId + " does not exist"));
+    }
+
+    public List<Player> getLeaderboard() {
+        return playerRepository.findTop10ByOrderByWinsDescLosesAsc();
+    }
+
+    public void incrementWins(Long playerId) {
+        Player player = getPlayer(playerId);
+        player.setWins(player.getWins() + 1);
+        playerRepository.save(player);
+    }
+
+    public void incrementLoses(Long playerId) {
+        Player player = getPlayer(playerId);
+        player.setLoses(player.getLoses() + 1);
+        playerRepository.save(player);
     }
 
     public Player findByLogin(String login) {

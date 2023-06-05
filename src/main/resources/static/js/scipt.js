@@ -51,9 +51,11 @@ function joinGame(gameId) {
     const playerId = getPlayerId();
     var xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
+        const jsonResponse = JSON.parse(xhttp.response);
         if (this.readyState == 4 && this.status == 200) {
-            const jsonResponse = JSON.parse(xhttp.response);
             window.location.href = "/front/board.html?gameId=" + jsonResponse.id + "&playerId=" + playerId;
+        } else {
+            alert(jsonResponse.message);
         }
     };
     xhttp.onerror = function() {
@@ -121,8 +123,8 @@ function buildBoardTable(pits1, pits2, pool1, pool2, mySide) {
 }
 
 function makeMove(pit) {
-    const playerId = getPlayerId()
-    const gameId = getGameId()
+    const playerId = getPlayerId();
+    const gameId = getGameId();
     // alert("Game " + gameId + ", Player " + playerId + " is going to move to cell " + pit);
     var xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -136,6 +138,26 @@ function makeMove(pit) {
     };
     xhttp.open("POST", "/api/game/" + gameId + "/move?playerId=" + playerId + "&move=" + pit, true);
     xhttp.send();
+}
+
+function loadLeaderboard() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const jsonResponse = JSON.parse(xhttp.response);
+            document.getElementById("leaderboard").innerHTML = buildLeaderboard(jsonResponse);
+        }
+    };
+    xhttp.open("GET", "/api/player/leaderboard", true);
+    xhttp.send();
+}
+
+function buildLeaderboard(players) {
+    let table = "<tr><th><div>Nickname</div></th><th><div>Wins</div></th><th><div>Loses</div></th></tr>";
+    for (let i = 0; i < players.length; i++) {
+        table += "<tr><td><div>" + players[i].nickname + "</div></td><td><div>" + players[i].wins + "</div></td><td><div>" + players[i].loses + "</div></td></tr>";
+    }
+    return table;
 }
 
 function getPlayerId() {

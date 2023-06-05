@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tech.assignment.kalaha.exception.GameNotFoundException;
 import tech.assignment.kalaha.exception.WrongPlayerException;
 import tech.assignment.kalaha.model.Board;
+import tech.assignment.kalaha.model.GameStatus;
 import tech.assignment.kalaha.model.Player;
 import tech.assignment.kalaha.repository.BoardRepository;
 
@@ -64,6 +65,17 @@ public class GameService {
         Board board = getBoard(boardId);
         Player player = playerService.getPlayer(playerId);
         Board changed = kalahaEngine.makeMove(board, player, pitNumber);
+        checkResult(board);
         return boardRepository.save(changed);
+    }
+
+    private void checkResult(Board board) {
+        if (board.getGameStatus() == GameStatus.FIRST_PLAYER_WON) {
+            playerService.incrementWins(board.getPlayer1Id());
+            playerService.incrementLoses(board.getPlayer2Id());
+        } else if (board.getGameStatus() == GameStatus.SECOND_PLAYER_WON) {
+            playerService.incrementWins(board.getPlayer2Id());
+            playerService.incrementLoses(board.getPlayer1Id());
+        }
     }
 }
