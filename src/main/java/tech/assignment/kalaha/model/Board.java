@@ -24,7 +24,7 @@ public class Board {
     private List<Integer> side2 = new ArrayList<>();
     private int pool1 = 0;
     private int pool2 = 0;
-    private GameState gameState = GameState.ONGOING;
+    private GameStatus gameStatus = GameStatus.ONGOING;
 
     public Long getId() {
         return id;
@@ -98,11 +98,11 @@ public class Board {
         this.pool2 = pool2;
     }
 
-    public GameState getGameState() {
-        return gameState;
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
     }
 }

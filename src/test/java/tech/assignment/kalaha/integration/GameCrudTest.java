@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import tech.assignment.kalaha.model.Board;
-import tech.assignment.kalaha.model.GameState;
+import tech.assignment.kalaha.model.GameStatus;
 import tech.assignment.kalaha.repository.BoardRepository;
 import tech.assignment.kalaha.service.GameService;
 import tech.assignment.kalaha.service.PlayerService;
@@ -55,7 +55,7 @@ public class GameCrudTest {
         int pool1 = 5;
         int pool2 = 3;
         int turn = 2;
-        GameState state = GameState.ONGOING;
+        GameStatus status = GameStatus.ONGOING;
 
         Board board = new Board();
         board.setPlayer1Id(player1Id);
@@ -64,7 +64,7 @@ public class GameCrudTest {
         board.setPool2(pool2);
         board.getSide1().add(4);
         board.getSide2().add(2);
-        board.setGameState(state);
+        board.setGameStatus(status);
         board.setTurn(turn);
 
         Long boardId = boardRepository.save(board).getId();
@@ -74,7 +74,7 @@ public class GameCrudTest {
         assertEquals(player2Id, retrieved.getPlayer2Id());
         assertEquals(pool1, retrieved.getPool1());
         assertEquals(pool2, retrieved.getPool2());
-        assertEquals(state, retrieved.getGameState());
+        assertEquals(status, retrieved.getGameStatus());
         assertEquals(turn, retrieved.getTurn());
         assertEquals(board.getSide1(), retrieved.getSide1());
         assertEquals(board.getSide2(), retrieved.getSide2());

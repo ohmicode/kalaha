@@ -2,7 +2,7 @@ package tech.assignment.kalaha.service;
 
 import org.junit.jupiter.api.Test;
 import tech.assignment.kalaha.model.Board;
-import tech.assignment.kalaha.model.GameState;
+import tech.assignment.kalaha.model.GameStatus;
 import tech.assignment.kalaha.model.Player;
 
 import java.util.Arrays;
@@ -26,7 +26,7 @@ public class KalahaEngineExecutionTest {
 
         Board result = engine.makeMove(board, player, move);
 
-        assertEquals(GameState.ONGOING, result.getGameState());
+        assertEquals(GameStatus.ONGOING, result.getGameStatus());
         assertEquals(0, result.getSide1().get(move));
         assertEquals(1, result.getPool1());
         assertEquals(1, result.getTurn());
@@ -44,7 +44,7 @@ public class KalahaEngineExecutionTest {
 
         Board result = engine.makeMove(board, player, move);
 
-        assertEquals(GameState.ONGOING, result.getGameState());
+        assertEquals(GameStatus.ONGOING, result.getGameStatus());
         assertEquals(0, result.getSide1().get(move));
         assertEquals(0, result.getPool1());
         assertEquals(0, result.getPool2());
@@ -63,7 +63,7 @@ public class KalahaEngineExecutionTest {
 
         Board result = engine.makeMove(board, player, move);
 
-        assertEquals(GameState.ONGOING, result.getGameState());
+        assertEquals(GameStatus.ONGOING, result.getGameStatus());
         assertEquals(0, result.getSide1().get(move));
         assertEquals(0, result.getSide1().get(move + 1));
         assertEquals(10, result.getPool1());
@@ -83,7 +83,7 @@ public class KalahaEngineExecutionTest {
 
         Board result = engine.makeMove(board, player, move);
 
-        assertEquals(GameState.SECOND_PLAYER_WON, result.getGameState());
+        assertEquals(GameStatus.SECOND_PLAYER_WON, result.getGameStatus());
         assertEquals(0, result.getSide1().get(move));
         assertEquals(6, result.getPool1());
         assertEquals(15, result.getPool2());
@@ -104,7 +104,7 @@ public class KalahaEngineExecutionTest {
         result = engine.makeMove(result, player1, 2);
         result = engine.makeMove(result, player1, 0);
 
-        assertEquals(GameState.ONGOING, result.getGameState());
+        assertEquals(GameStatus.ONGOING, result.getGameStatus());
         assertEquals(Arrays.asList(0, 6, 1), result.getSide1());
         assertEquals(Arrays.asList(7, 6, 0), result.getSide2());
         assertEquals(3, result.getPool1());
@@ -123,7 +123,7 @@ public class KalahaEngineExecutionTest {
         Board result = engine.makeMove(board, player1, 1);
         result = engine.makeMove(result, player1, 0);
 
-        assertEquals(GameState.FIRST_PLAYER_WON, result.getGameState());
+        assertEquals(GameStatus.FIRST_PLAYER_WON, result.getGameStatus());
         assertEquals(Arrays.asList(0, 0), result.getSide1());
         assertEquals(Arrays.asList(0, 0), result.getSide2());
         assertEquals(3, result.getPool1());
@@ -146,7 +146,7 @@ public class KalahaEngineExecutionTest {
         result = engine.makeMove(result, player1, 1);
         result = engine.makeMove(result, player1, 2);
 
-        assertEquals(GameState.DRAW, result.getGameState());
+        assertEquals(GameStatus.DRAW, result.getGameStatus());
         assertEquals(Arrays.asList(0, 0, 0), result.getSide1());
         assertEquals(Arrays.asList(0, 0, 0), result.getSide2());
         assertEquals(3, result.getPool1());

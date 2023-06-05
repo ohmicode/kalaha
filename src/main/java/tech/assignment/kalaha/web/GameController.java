@@ -30,10 +30,12 @@ public class GameController {
     @GetMapping("/{gameId}")
     public BoardDto getGame(
             @ApiParam(name = "gameId", value = "Game id to load", example = "1")
-            @PathVariable Long gameId
+            @PathVariable Long gameId,
+            @ApiParam(name = "playerId", value = "Player id, owner of the Game", example = "12")
+            @RequestParam(required = false) Long playerId
     ) {
         Board board = gameService.getBoard(gameId);
-        return transform(board);
+        return transform(board, playerId);
     }
 
     @ApiOperation(value = "Create a game", notes = "Creates a new Game for a given Player")
@@ -48,10 +50,10 @@ public class GameController {
     ){
         if (size == null || stones == null) {
             Board board = gameService.createGame(playerId);
-            return transform(board);
+            return transform(board, playerId);
         } else {
             Board board = gameService.createCustomGame(playerId, size, stones);
-            return transform(board);
+            return transform(board, playerId);
         }
     }
 
@@ -64,7 +66,7 @@ public class GameController {
             @RequestParam Long playerId
     ) {
         Board board = gameService.joinGame(gameId, playerId);
-        return transform(board);
+        return transform(board, playerId);
     }
 
     @ApiOperation(value = "Make a move", notes = "Given Player makes a move in the Game")
@@ -83,10 +85,11 @@ public class GameController {
             @RequestParam Integer move
     ) {
         Board board = gameService.makeMove(gameId, playerId, move);
-        return transform(board);
+        return transform(board, playerId);
     }
 
-    private BoardDto transform(Board board) {
+    private BoardDto transform(Board board, Long playerId) {
+        var mySide = detectSide(board, playerId);
         return new BoardDto(
                 board.getId(),
                 board.getName(),
@@ -94,7 +97,21 @@ public class GameController {
                 board.getSide2(),
                 board.getPool1(),
                 board.getPool2(),
-                board.getGameState()
+                board.getGameStatus(),
+                mySide,
+                board.getTurn() == mySide
         );
+    }
+
+    private int detectSide(Board board, Long playerId) {
+        if (playerId == null) {
+            return 0;
+        } else if (playerId.equals(board.getPlayer1Id())) {
+            return 1;
+        } else if (playerId.equals(board.getPlayer2Id())) {
+            return 2;
+        } else {
+            return 0;
+        }
     }
 }

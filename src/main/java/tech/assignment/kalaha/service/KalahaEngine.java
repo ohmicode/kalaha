@@ -5,7 +5,7 @@ import tech.assignment.kalaha.exception.EmptyFieldException;
 import tech.assignment.kalaha.exception.GameStateException;
 import tech.assignment.kalaha.exception.WrongPlayerException;
 import tech.assignment.kalaha.model.Board;
-import tech.assignment.kalaha.model.GameState;
+import tech.assignment.kalaha.model.GameStatus;
 import tech.assignment.kalaha.model.Player;
 
 import java.util.List;
@@ -73,7 +73,7 @@ public class KalahaEngine {
     }
 
     private void validate(Board board, Player player, int pitNumber) {
-        if (board.getGameState() != GameState.ONGOING) {
+        if (board.getGameStatus() != GameStatus.ONGOING) {
             throw new GameStateException("This game has been finished");
         }
         if (board.getTurn() == 1) {
@@ -177,11 +177,11 @@ public class KalahaEngine {
         }
 
         if (board.getPool1() > board.getPool2()) {
-            board.setGameState(GameState.FIRST_PLAYER_WON);
+            board.setGameStatus(GameStatus.FIRST_PLAYER_WON);
         } else if (board.getPool2() > board.getPool1()) {
-            board.setGameState(GameState.SECOND_PLAYER_WON);
+            board.setGameStatus(GameStatus.SECOND_PLAYER_WON);
         } else {
-            board.setGameState(GameState.DRAW);
+            board.setGameStatus(GameStatus.DRAW);
         }
     }
 

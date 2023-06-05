@@ -50,7 +50,7 @@ public class GameControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pits2[2]").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pool1").value(10))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pool2").value(20))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.gameState").value("ONGOING"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.gameStatus").value("ONGOING"));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class GameControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pits2[1]").value(5))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pool1").value(0))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pool2").value(0))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.gameState").value("ONGOING"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.gameStatus").value("ONGOING"));
     }
 
     @Test
@@ -110,7 +110,7 @@ public class GameControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pits2[1]").value(3))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pool1").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.pool2").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.gameState").value("ONGOING"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.gameStatus").value("ONGOING"));
     }
 
     @Test

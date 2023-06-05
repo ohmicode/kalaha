@@ -9,18 +9,18 @@
 <body onload="startBoardRefresh()">
 <div class="container">
     <h2 id="gameName">Game name</h2>
-    <p>Your turn</p>
-    <p>Tell your opponent the game number to join: <span id="gameNumber">?</span></p>
+    <p id="yourTurn">Your turn</p>
+    <p id="spectatorMode">Spectator mode</p>
+    <p id="inviteLink">Tell your opponent the game number to join: <span id="gameNumber">?</span></p>
 </div>
 
-<table class="board">
-    <tr id="player2pits">
-        <td id="pool2" rowspan="2">0</td><td id="pit2">X</td><td id="pool1" rowspan="2">0</td>
-    </tr>
-    <tr id="player1pits">
-        <td id="pit1">X</td>
-    </tr>
-</table>
+<div class="container">
+    <table id="gameBoard" class="board">
+        <tr>
+            <td><div>LOADING...</div></td>
+        </tr>
+    </table>
+</div>
 
 <div class="footer">
     <p>Relax and Enjoy!</p>

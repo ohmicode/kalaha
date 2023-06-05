@@ -1,7 +1,7 @@
 package tech.assignment.kalaha.service;
 
 import tech.assignment.kalaha.model.Board;
-import tech.assignment.kalaha.model.GameState;
+import tech.assignment.kalaha.model.GameStatus;
 import tech.assignment.kalaha.model.Player;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class TestDataProvider {
             board.getSide1().add(0);
             board.getSide2().add(0);
         }
-        board.setGameState(GameState.FIRST_PLAYER_WON);
+        board.setGameStatus(GameStatus.FIRST_PLAYER_WON);
         return board;
     }
 
@@ -35,7 +35,7 @@ public class TestDataProvider {
         board.setPool2(pool2);
         board.getSide1().addAll(stones1);
         board.getSide2().addAll(stones2);
-        board.setGameState(GameState.ONGOING);
+        board.setGameStatus(GameStatus.ONGOING);
         return board;
     }
 

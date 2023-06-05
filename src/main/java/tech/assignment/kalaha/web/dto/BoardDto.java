@@ -1,7 +1,7 @@
 package tech.assignment.kalaha.web.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import tech.assignment.kalaha.model.GameState;
+import tech.assignment.kalaha.model.GameStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,9 @@ public class BoardDto {
     @ApiModelProperty(notes = "Amount of captured stones in the pool (big pit) of the Player 2", example = "0", required = true)
     private int pool2;
     @ApiModelProperty(notes = "Current game state", example = "ONGOING", allowableValues = "ONGOING, FIRST_PLAYER_WON, SECOND_PLAYER_WON, DRAW", required = true)
-    private GameState gameState = GameState.ONGOING;
+    private GameStatus gameStatus = GameStatus.ONGOING;
+    private int mySide;
+    private boolean myTurn;
 
     public BoardDto(
             Long id,
@@ -30,15 +32,19 @@ public class BoardDto {
             List<Integer> side2,
             int pool1,
             int pool2,
-            GameState gameState
+            GameStatus gameStatus,
+            int mySide,
+            boolean myTurn
     ) {
         this.id = id;
         this.name = name;
         this.pool1 = pool1;
         this.pool2 = pool2;
-        this.gameState = gameState;
+        this.gameStatus = gameStatus;
         this.pits1.addAll(side1);
         this.pits2.addAll(side2);
+        this.mySide = mySide;
+        this.myTurn = myTurn;
     }
 
     public Long getId() {
@@ -89,11 +95,27 @@ public class BoardDto {
         this.pool2 = pool2;
     }
 
-    public GameState getGameState() {
-        return gameState;
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
+    public int getMySide() {
+        return mySide;
+    }
+
+    public void setMySide(int mySide) {
+        this.mySide = mySide;
+    }
+
+    public boolean isMyTurn() {
+        return myTurn;
+    }
+
+    public void setMyTurn(boolean myTurn) {
+        this.myTurn = myTurn;
     }
 }
