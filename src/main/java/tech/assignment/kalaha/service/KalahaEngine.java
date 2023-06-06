@@ -76,6 +76,9 @@ public class KalahaEngine {
         if (board.getGameStatus() != GameStatus.ONGOING) {
             throw new GameStateException("This game has been finished");
         }
+        if (board.getPlayer2Id() == null) {
+            throw new GameStateException("This game is not started yet. Waiting for a second player to join");
+        }
         if (board.getTurn() == 1) {
             if (!player.getId().equals(board.getPlayer1Id())) {
                 throw new WrongPlayerException("It is not " + player.getNickname() + "'s turn");

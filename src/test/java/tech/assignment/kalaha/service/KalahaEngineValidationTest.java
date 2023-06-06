@@ -26,6 +26,17 @@ public class KalahaEngineValidationTest {
     }
 
     @Test
+    void shouldCheckGameIsStarted() {
+        Player player1 = createFirstPlayer();
+        Board board = engine.createGame(player1);
+        int move = 0;
+
+        assertThrows(GameStateException.class, () -> {
+            engine.makeMove(board, player1, move);
+        });
+    }
+
+    @Test
     void shouldCheckPlayer() {
         Player player1 = createFirstPlayer();
         Player player2 = createSecondPlayer();
@@ -54,13 +65,15 @@ public class KalahaEngineValidationTest {
 
     @Test
     void shouldCheckEmptyTurn() {
-        Player player = createFirstPlayer();
-        Board board = engine.createGame(player);
+        Player player1 = createFirstPlayer();
+        Player player2 = createSecondPlayer();
+        Board board = engine.createGame(player1);
+        board.setPlayer2Id(player2.getId());
         board.getSide1().set(0, 0);
         int move = 0;
 
         assertThrows(EmptyFieldException.class, () -> {
-            engine.makeMove(board, player, move);
+            engine.makeMove(board, player1, move);
         });
     }
 }
