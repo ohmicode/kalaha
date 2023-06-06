@@ -27,11 +27,16 @@ still has stones in his pits keeps them and puts them in his big pit. The winner
 the game is the player who has the most stones in his big pit.
 
 ### How to run
-1. Run docker compose:
+1. Build project into `build/lib` (default location)
+2. Build Docker image(s):
+   ```
+   docker-compose build
+   ```
+3. Run docker compose:
    ```
    docker-compose up
    ```
-2. Run the game in a browser:
+4. Run the game in a browser:
    ```
    localhost:8080/front/index.html
    ```
