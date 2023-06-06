@@ -1,7 +1,7 @@
 # Kalaha multiplayer game
 
 Game of Kalaha. This is server-based online multiplayer board game for two players.
-Supports spectator mode and Leaderboard. Implemented as a test assignment.
+Supports spectator mode and a leaderboard.
 
 ### Rules
 Board Setup  
@@ -26,26 +26,40 @@ The game is over as soon as one of the sides runs out of stones. The player who
 still has stones in his pits keeps them and puts them in his big pit. The winner of
 the game is the player who has the most stones in his big pit.
 
-### How to run
+### How to build & run
 1. Build project into `build/lib` (default location)
-2. Build Docker image(s):
+1. Build Docker image(s):
    ```
    docker-compose build
    ```
-3. Run docker compose:
+1. Run docker compose:
    ```
    docker-compose up
    ```
-4. Run the game in a browser:
+1. Open the game in a browser:
    ```
-   localhost:8080/front/index.html
+   http://localhost:8080/front/index.html
    ```
+   Open swagger:
+   ```
+   http://localhost:8080/swagger-ui/
+   ```
+
+### Implementation details
+1. Kalaha engine (with ability to create custom boards).
+1. Back-end microservice to create, join and play a game.
+1. Tests (Unit tests + Integration tests).
+1. Actuator for metrics.
+1. Swagger for API docs.
+1. Dockerfile and docker-compose for containerization.
+1. Simple front-end with leaderboard and spectator mode.
 
 ### TODO
 List of improvements that could be done, but were not applied yet:
 1. Split front-end and back-end parts. These should be different repos for production-like solution.
-2. Append moves History for each Game and ability to Replay it.
-3. Improve "join game" procedure on front-end: Generate a full link to join instead of "id" field.
-4. Replace Long with UUID for playerId and gameId, if we want more security here.
-5. We suppose this is a microservice BEHIND an Auth service, which provides all the security and identification functionality. If we suppose to make this project a standalone web app, we should append security, proper identification and login/password functionality alongside UUIDs for the entities ids.
-6. Append Prometeus+Grafana metrics. We have Actuator endpoints only for now.
+1. Append moves History for each Game and ability to Replay it.
+1. AI player.
+1. Improve "join game" procedure on front-end: Generate a full link to join instead of "id" field.
+1. Replace Long with UUID for playerId and gameId, if we want more security here.
+1. We suppose this is a microservice BEHIND an Auth service, which provides all the security and identification functionality. If we suppose to make this project a standalone web app, we should append security, proper identification and login/password functionality alongside UUIDs for the entities ids.
+1. Append Prometeus+Grafana metrics. We have Actuator endpoints only for now.
