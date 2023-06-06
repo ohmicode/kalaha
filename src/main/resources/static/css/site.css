@@ -1,8 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+body {
+    padding: 24px;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0;
+}
+
 .container {
     width: 70%;
     margin: auto;
     padding: 10px;
     text-align: center;
+}
+
+.boardContainer {
+    display: flex;
+    justify-content: center;
 }
 
 .data {
@@ -12,7 +25,16 @@
 }
 
 .data input {
-    margin: 5px;
+    margin: 5px 0 5px 10px;
+}
+
+.data label {
+    min-width: 5em;
+    display: inline-block;
+}
+
+.data button {
+    margin-top: 10px;
 }
 
 .left {
@@ -46,4 +68,22 @@
     text-align: right;
     color: darkgray;
     font-size: 12px;
+}
+
+input {
+    appearance: none;
+    border:1px solid #EEEEEE;
+    border-radius: 2px;
+}
+
+button {
+    appearance: none;
+    color: wheat;
+    background: black;
+    border: none;
+    border-radius: 2px;
+    padding: 12px;
+    text-transform:uppercase;
+    text-align:center;
+    font-weight: 600;
 }

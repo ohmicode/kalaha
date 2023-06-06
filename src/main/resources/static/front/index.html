@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+    <meta charset="utf-8" />
     <title>Kalaha online game</title>
     <link rel="stylesheet" type="text/css" href="/css/site.css">
     <script src="/js/scipt.js"></script>
@@ -8,8 +9,7 @@
 
 <body>
 <div class="container">
-    <h2>Welcome!</h2>
-    <p>Please login to start playing or</p>
+    <h2>Kalaha</h2>
     <p>
         <a href="/front/spectate.html">Spectate</a>
         <br/>
@@ -18,20 +18,22 @@
 </div>
 
 <div class="data left">
+    <h3>Existing player</h3>
     <label for="login">login</label>
     <input id="login" name="login"/>
     <br/>
-    <button type="button" onclick="loginUser();">Login</button>
+    <button type="button" onclick="loginUser();">Enter</button>
 </div>
 
 <div class="data right">
+    <h3>New player</h3>
     <label for="newlogin">login</label>
     <input id="newlogin" name="newlogin"/>
     <br/>
     <label for="nickname">nickname</label>
     <input id="nickname" name="nickname"/>
     <br/>
-    <button type="button" onclick="createUser();">Create</button>
+    <button type="button" onclick="createUser();">Register</button>
 </div>
 
 <div class="footer">
