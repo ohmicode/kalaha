@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorDto> handleThrowable(Throwable exception) {
         UUID traceId = UUID.randomUUID();
         ErrorDto error = new ErrorDto(traceId, GLOBAL, "Internal error");
-        logger.error(traceId + ". Something went wrong: " + exception.getMessage());
+        logger.error(traceId + ". Something went wrong: " + exception.getMessage(), exception);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 

@@ -4,9 +4,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.assignment.kalaha.model.Board;
+import tech.assignment.kalaha.model.GameStatus;
 import tech.assignment.kalaha.service.GameService;
 import tech.assignment.kalaha.web.dto.BoardDto;
 
@@ -17,6 +20,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/game")
 @ApiOperation(value = "Game API", notes = "Provides methods to control one Game match")
 public class GameController {
+
+    private static final Logger logger = LogManager.getLogger(GameController.class.getName());
 
     private GameService gameService;
 
@@ -59,9 +64,11 @@ public class GameController {
     ){
         if (size == null || stones == null) {
             Board board = gameService.createGame(playerId);
+            logger.info("Standard game #" + board.getId() + " has been created by player #" + playerId);
             return transform(board, playerId);
         } else {
             Board board = gameService.createCustomGame(playerId, size, stones);
+            logger.info("Custom game #" + board.getId() + " (" + size + "x" + stones + ") has been created by player #" + playerId);
             return transform(board, playerId);
         }
     }
@@ -75,6 +82,7 @@ public class GameController {
             @RequestParam Long playerId
     ) {
         Board board = gameService.joinGame(gameId, playerId);
+        logger.info("Player #" + playerId + " joined to the game #" + board.getId());
         return transform(board, playerId);
     }
 
@@ -94,6 +102,10 @@ public class GameController {
             @RequestParam Integer move
     ) {
         Board board = gameService.makeMove(gameId, playerId, move);
+        logger.debug("Game #" + board.getId() + ": Player #" + playerId + " moved " + move);
+        if (board.getGameStatus() != GameStatus.ONGOING) {
+            logger.info("Game #" + board.getId() + " is finished. " + board.getGameStatus());
+        }
         return transform(board, playerId);
     }
 

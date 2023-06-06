@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.assignment.kalaha.model.Player;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/player")
 @ApiOperation(value = "Player API", notes = "Provides methods to create and retrieve a Player info")
 public class PlayerController {
+
+    private static final Logger logger = LogManager.getLogger(PlayerController.class.getName());
 
     private PlayerService playerService;
 
@@ -52,6 +56,7 @@ public class PlayerController {
             @RequestParam String login
     ) {
         Player player = playerService.findByLogin(login);
+        logger.debug("Player logged in: " + player.getId());
         return transform(player);
     }
 
@@ -64,6 +69,7 @@ public class PlayerController {
             @RequestParam String nickname
     ) {
         Player player = playerService.createPlayer(login, nickname);
+        logger.info("New player created: " + player.getId());
         return transform(player);
     }
 
